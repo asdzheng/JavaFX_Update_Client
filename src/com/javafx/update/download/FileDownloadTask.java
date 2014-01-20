@@ -37,7 +37,7 @@ public class FileDownloadTask extends Task<HashMap<String, Object>> {
             }
         };
         HashMap<String, Object> results = new HashMap<String, Object>();
-        ClientRequestDatasTool.requestDownloadFile(params,listener);
+        results = ClientRequestDatasTool.requestDownloadFile(params,listener);
         return results;
     }
 }
