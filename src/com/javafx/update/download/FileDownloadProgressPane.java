@@ -14,10 +14,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-/**
- *
- * @author Richard
- */
 public class FileDownloadProgressPane extends StackPane implements ProgressChangeListener{
     private ProgressBar progressBar;
     private Label label;

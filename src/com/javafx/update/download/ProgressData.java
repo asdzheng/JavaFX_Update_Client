@@ -1,16 +1,12 @@
 package com.javafx.update.download;
 
-/**
- *
- * @author Richard
- */
 public class ProgressData {
 
-    //以下3个变量直接来自ProgressListener的update方法
+    // the three variable from ProgressListener update method
     private long totalSize;
     private long curSize;
     private int items;
-    //以下两个变量是计算出来的
+    //the below variable is caculated 
     private double percent;
     private String speed;
 

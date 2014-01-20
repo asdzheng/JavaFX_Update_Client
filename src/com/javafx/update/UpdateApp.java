@@ -27,14 +27,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Richard
- */
 public class UpdateApp extends Application {
     
     private FileDownloadProgressPane indicator;
     private ProgressIndicator progress;
+    //version.ini record the version data in projectPath/conf
     private String localVerFileName = getProjectFolder() + "conf/version.ini";
     
     @Override
@@ -62,12 +59,13 @@ public class UpdateApp extends Application {
     }
     
     private void processUpdate() {
+        //send localversion and localFolder to server
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("localVersion", getNowVer(localVerFileName));
         params.put("localFolder", getProjectFolder());
         indicator.setVisible(true);
         progress.setVisible(true);
-        final FileDownloadTask downloadTask = new FileDownloadTask("UpdateFileAction", params, indicator);
+        final FileDownloadTask downloadTask = new FileDownloadTask( params, indicator);
         
         new Thread(downloadTask).start();
         downloadTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -87,6 +85,7 @@ public class UpdateApp extends Application {
                         progress.setVisible(false);
                     }
                 });
+                //get update result
                 HashMap<String, Object> results = downloadTask.getValue();
                 String result = (String) results.get("actionResult");
                 if(result == null) {
@@ -105,6 +104,7 @@ public class UpdateApp extends Application {
         });
     }
     
+    //upzip download file and delete zip and update localversion 
     public void processLocalFile(HashMap<String, Object> results) {
         String localUpdatePath = "";
         String projectFolder = getProjectFolder();
@@ -112,16 +112,14 @@ public class UpdateApp extends Application {
         ArrayList<FileData> versions = (ArrayList<FileData>) results.get("files");
         for (FileData version : versions) {
             localUpdatePath = projectFolder + version.getFileName() + version.getExtension();
-            //解压出来的文件不能包含中文，不然会报错
             ZipTool.unZip(localUpdatePath, projectFolder);
             deleteFile(localUpdatePath);
         }
-        // UpdateLocalVerFile(localVerFileName, updateVersion);
-        System.out.println("/n文件下载完成/n");
+        UpdateLocalVerFile(localVerFileName, updateVersion);
+        System.out.println("download success!");
     }
     
     private void UpdateLocalVerFile(String localVerFileName, String updateVersion) {
-        //把本地版本文件更新为网络同步
         FileWriter verOS = null;
         BufferedWriter bw = null;
         try {
@@ -145,18 +143,11 @@ public class UpdateApp extends Application {
         return UpdateTool.getNowVer(LocalVerFileName);
     }
 
-    /**
-     * 得到工程文件路径
-     *
-     * @return
-     * @throws java.lang.Exception
-     */
     public static String getProjectFolder() {
-        return UpdateTool.getProjectFolder();
+        return UpdateTool.getProjectFolderPath();
     }
 
-    //在Applicatin里面，main方法会直接被忽视掉，直接运行start方法
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 }

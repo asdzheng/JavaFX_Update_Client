@@ -2,10 +2,6 @@ package com.javafx.update.model;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Richard
- */
 public class FileData implements Serializable {
 
     private String fileName;

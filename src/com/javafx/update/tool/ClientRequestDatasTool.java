@@ -17,15 +17,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 该工具类专用于下载
- *
- * @author Richard
+ * the tool for download file and get datas from server
  */
 public class ClientRequestDatasTool {
 
     public static HashMap<String, Object> requestDownloadFile(HashMap<String, Object> params, ProgressChangeListener changeListener) throws ClassNotFoundException {
 
         HashMap<String, Object> results = null;
+        //this request is get the file parameters
         params.put("type", "parameters");
         try {
             URL url = new URL("http://localhost:8080/JavaFX_Update_Server/FileDownloadServlet");
@@ -58,6 +57,7 @@ public class ClientRequestDatasTool {
         String allFileSizeStr = (String) results.get("allFileSize");
         long allFileSize = Long.parseLong(allFileSizeStr);
         ArrayList<FileData> files = (ArrayList<FileData>) results.get("files");
+        //this request is download file
         params.put("type", "bytes");
 
         if (allFileSize == 0) {
@@ -105,7 +105,7 @@ public class ClientRequestDatasTool {
         }
         return result;
     }
-
+    //update progress date
     private static String processFile(URLConnection openConnection, String fileFolder, String fileName,
             String extension, long allFileSize, ProgressChangeListener changeListener) {
         String result = "success";
@@ -137,8 +137,8 @@ public class ClientRequestDatasTool {
 
         return result;
     }
-
-    public static HashMap<String, String> getDatas(String checkUpdateAction, HashMap<String, Object> requestParams) {
+    
+    public static HashMap<String, String> getDatas(HashMap<String, Object> requestParams) {
         HashMap<String, String> results = null;
         try {
             URL url = new URL("http://localhost:8080/JavaFX_Update_Server/CheckUpdateServlet");

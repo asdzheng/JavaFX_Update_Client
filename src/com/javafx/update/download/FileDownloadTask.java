@@ -6,9 +6,8 @@ import java.util.HashMap;
 import javafx.concurrent.Task;
 
 /**
- * 这是一个异步下载文件的Task
- *
- * @author Richard
+ * 
+ * asynchronous download task
  */
 public class FileDownloadTask extends Task<HashMap<String, Object>> {
 
@@ -16,7 +15,7 @@ public class FileDownloadTask extends Task<HashMap<String, Object>> {
     private HashMap<String, Object> params;
     private FileDownloadProgressPane changeListener;
 
-    public FileDownloadTask(String actionName, HashMap<String, Object> params, FileDownloadProgressPane changeListener) {
+    public FileDownloadTask(HashMap<String, Object> params, FileDownloadProgressPane changeListener) {
         this.params = params;
         this.changeListener = changeListener;
     }

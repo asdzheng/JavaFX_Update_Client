@@ -7,7 +7,7 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 /*
- * 压缩文件夹
+ * unzip file
  */
 public class ZipTool {
 
@@ -15,7 +15,7 @@ public class ZipTool {
     private String sourceFilePath;
     private String pathHead;
     private ZipOutputStream zos;
-    private FileInputStream fis;
+
 
     public ZipTool(String sourceFilePath, String currentZipFilePath) {
         try {
@@ -23,7 +23,6 @@ public class ZipTool {
             this.currentZipFilePath = currentZipFilePath;
             pathHead = this.sourceFilePath.substring(0, this.sourceFilePath.lastIndexOf("/"));
             zos = new ZipOutputStream(new FileOutputStream(this.currentZipFilePath));
-            //设定文件压缩级别
             zos.setLevel(9);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
