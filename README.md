@@ -21,5 +21,6 @@ Database you need to create
         INSERT INTO `versions` VALUES ('2', '1.0', '2013-12-16 17:10:49', '');
         INSERT INTO `versions` VALUES ('3', '1.1', '2013-12-16 17:11:17', 'update/1.1.zip');
 
+
 The JavaFX_Update_Server: https://github.com/asdzheng/Javafx_Update_Server
     
