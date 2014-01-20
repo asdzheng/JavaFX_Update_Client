@@ -89,13 +89,17 @@ public class UpdateApp extends Application {
                 });
                 HashMap<String, Object> results = downloadTask.getValue();
                 String result = (String) results.get("actionResult");
+                if(result == null) {
+                    JOptionPane.showMessageDialog(null, "No update zip!");
+                    System.exit(0);
+                }
                 if (result.equalsIgnoreCase("failed")) {
                     JOptionPane.showMessageDialog(null, "Update Fail!");
                     System.exit(0);
                 } else {
                     System.out.println("results : " + results);
                     processLocalFile(results);
-                    JOptionPane.showMessageDialog(null, "UpdateSuccess");
+                    JOptionPane.showMessageDialog(null, "Update Success");
                 }
             }
         });
