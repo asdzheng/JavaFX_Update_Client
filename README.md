@@ -23,4 +23,8 @@ Database you need to create
 
 
 The JavaFX_Update_Server: https://github.com/asdzheng/Javafx_Update_Server
+
+You can see the update flowchat from wiki:https://github.com/asdzheng/JavaFX_Update_Client/wiki/javafx-application-update-flow-chat
+
+or from my blog ： http://blog.csdn.net/asdzheng/article/details/18549741
     
